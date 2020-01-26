@@ -4,9 +4,14 @@ import * as Font from 'expo-font';
 import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import LoginScreen from './src/components/LoginScreen';
+import { Provider } from 'react-redux';
+import {persistor, store} from './src/store'
+import { PersistGate } from 'redux-persist/integration/react';
 
-import AppNavigator from './navigation/AppNavigator';
+
+//const { persistor, store } = configureStore();
+
+import AppNavigator from './src/navigation/AppNavigator';
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -23,7 +28,16 @@ export default function App(props) {
     return (
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <LoginScreen />
+
+        <Provider store={store}>
+        <PersistGate  persistor={persistor}>
+        
+        <AppNavigator />
+        </PersistGate>
+     
+        
+        </Provider>
+     
       </View>
     );
   }

@@ -3,8 +3,9 @@ import { Platform } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
-import TabBarIcon from '../components/TabBarIcon';
+import TabBarIcon from '../../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
+import MyProfileScreen from '../components/MyProfileScreen'
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
@@ -15,13 +16,13 @@ const config = Platform.select({
 
 const HomeStack = createStackNavigator(
   {
-    Home: HomeScreen,
+    Home: MyProfileScreen,
   },
   config
 );
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+  tabBarLabel: 'My Profile',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}

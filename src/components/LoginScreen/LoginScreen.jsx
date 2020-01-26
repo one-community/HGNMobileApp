@@ -1,8 +1,8 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Image } from 'react-native';
+import * as LocalAuthentication from 'expo-local-authentication';
 
-import { COLOR } from '../utils/colors';
+import { COLOR } from '../../utils/colors';
 import {
   Container,
   Header,
@@ -22,9 +22,23 @@ import {
   Input
 } from 'native-base';
 
-const LoginScreen = () => {
+const LoginScreen = ({loginUser}) => {
   const [email, setEmail] = useState('siddharth.gore@live.com');
   const [password, setPassword] = useState('Siddharth@123');
+
+
+
+
+
+  // useEffect(() => {
+  //   const checkAuth = async () => {
+  //     const isSupported = await LocalAuthentication.hasHardwareAsync();
+  //     //console.log('isSupported',isSupported)
+  //   };
+
+  //   checkAuth();
+  // }, []);
+
   return (
     <Container>
       <Content padder contentContainerStyle={styles.content}>
@@ -47,7 +61,7 @@ const LoginScreen = () => {
             <Input secureTextEntry={true} value={password} />
           </Item>
         </Form>
-        <Button full primary>
+        <Button full primary  onPress={()=>loginUser({ email, password })}>
           <Text> Login </Text>
         </Button>
       </Content>
