@@ -7,9 +7,9 @@ import { loginUser } from "../../actions/authActions"
 import LoginScreen from './LoginScreen'
 
 const mapStateToProps = state => ({
-	auth: state.auth,
-	userProfile: _.get(state, 'userProfile'),
-	user: _.get(state, 'user', {})
+
+	isAuthenticated: _.get(state, 'auth.isAuthenticated',false),
+
 })
 
 export default connect(mapStateToProps, {

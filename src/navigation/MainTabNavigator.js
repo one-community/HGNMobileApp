@@ -73,6 +73,19 @@ const tabNavigator = createBottomTabNavigator({
   HomeStack,
   LinksStack,
   SettingsStack,
+},
+{
+
+  tabBarOptions: {
+    activeTintColor: 'tomato',
+    inactiveTintColor: 'gray',
+    labelStyle: {
+      fontSize: 12,
+    },
+    style: {
+      backgroundColor: '#FFEEF2',
+    },
+  },
 });
 
 tabNavigator.path = '';

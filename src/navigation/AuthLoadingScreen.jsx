@@ -18,6 +18,8 @@ export default class AuthLoadingScreen extends React.Component {
 
   // Fetch the token from storage then navigate to our appropriate place
   _bootstrapAsync = async () => {
+    //console.log('_bootstrap function')
+    //await AsyncStorage.removeItem(tokenKey)
     const userToken = await AsyncStorage.getItem(tokenKey);
     //console.log('userToken', userToken);
     if (userToken) {
@@ -36,7 +38,7 @@ export default class AuthLoadingScreen extends React.Component {
       //console.log('url', userProfileURL);
       let currentUserProfile = await httpService.get(userProfileURL);
       currentUserProfile = { ...currentUserProfile.data, ...decoded };
-      //console.log('currentUserProfile', currentUserProfile);
+      console.log('currentUserProfile', currentUserProfile);
       store.dispatch(setCurrentUser(currentUserProfile));
     }
 

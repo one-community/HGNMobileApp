@@ -25,7 +25,7 @@ import { errorsReducer } from './errorsReducer';
 
 export default combineReducers({
   auth: authReducer,
-  userProfile: userProfileByIdReducer,
+  //userProfile: userProfileByIdReducer,
   // allUserProfiles: allUserProfilesReducer,
   // userTeamMembers: userTeamMembersReducer,
   // userProjectMembers: userProjectMembersReducer,

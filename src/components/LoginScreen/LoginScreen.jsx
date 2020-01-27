@@ -22,13 +22,20 @@ import {
   Input
 } from 'native-base';
 
-const LoginScreen = ({loginUser}) => {
+const LoginScreen = props => {
   const [email, setEmail] = useState('siddharth.gore@live.com');
   const [password, setPassword] = useState('Siddharth@123');
 
+  const { loginUser, isAuthenticated, navigation } = props;
+  console.log('isAuthenticated', isAuthenticated);
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      console.log('Hey');
 
-
+      // props.navigation.navigate('AuthLoading');
+    }
+  }, [props.isAuthenticated]);
 
   // useEffect(() => {
   //   const checkAuth = async () => {
@@ -54,14 +61,14 @@ const LoginScreen = ({loginUser}) => {
         <Form>
           <Item fixedLabel>
             <Label style={styles.label}>Email Address</Label>
-            <Input value={email} />
+            <Input value={email} style={styles.input} />
           </Item>
           <Item fixedLabel last>
             <Label style={styles.label}>Password</Label>
-            <Input secureTextEntry={true} value={password} />
+            <Input secureTextEntry={true} value={password} style={styles.input} />
           </Item>
         </Form>
-        <Button full primary  onPress={()=>loginUser({ email, password })}>
+        <Button full primary onPress={() => loginUser({ email, password }, props.navigation)}>
           <Text> Login </Text>
         </Button>
       </Content>
@@ -81,25 +88,26 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-evenly'
-
-    //backgroundColor:'#9D69A3'
   },
   pageTitle: {
     fontFamily: 'space-mono',
     fontWeight: 'bold',
     fontSize: 30,
-    color: '#55505C'
+    color: '#55505C',
+    alignSelf: 'center'
   },
   logo: {
-    width: 200,
-    height: 200,
-    alignSelf: 'center'
+    width: 215,
+    height: 215,
+    alignSelf: 'center',
+    borderRadius: 10
   },
   label: {
     fontSize: 16,
     fontWeight: '800',
     color: COLOR.labelFontColor
-  }
+  },
+  input: { color: 'black', fontFamily: 'space-mono' }
 });
 
 export default LoginScreen;
