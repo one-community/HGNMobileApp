@@ -1,5 +1,5 @@
-import * as types  from './../constants/projects'
-export const allProjectsReducer = (allProjects = null, action) => {
+import * as types from './../constants/projects';
+export const allProjectsReducer = (allProjects = [], action) => {
   if (action.type === types.GET_ALL_PROJECTS) {
     return action.payload;
   }

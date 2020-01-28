@@ -27,7 +27,7 @@ export default function App(props) {
   } else {
     return (
       <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle='dark-content' />}
+        {Platform.OS === 'ios' && <StatusBar barStyle='default' />}
 
         <Provider store={store}>
         <PersistGate  persistor={persistor}>

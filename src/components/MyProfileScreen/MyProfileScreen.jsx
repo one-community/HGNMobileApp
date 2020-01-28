@@ -28,7 +28,7 @@ import {
   Separator,
   CheckBox
 } from 'native-base';
-import Colors from '../../../constants/Colors';
+
 const MyProfileScreen = ({ currentUserProfile }) => {
   console.log('currentUserProfile', currentUserProfile);
 
@@ -52,7 +52,7 @@ const MyProfileScreen = ({ currentUserProfile }) => {
           <CardItem>
             <Image
               source={{ uri: 'https://avatars2.githubusercontent.com/u/46716162?s=460&v=4' }}
-              style={{ height: 200, width: 100, flex: 1, borderRadius: 10 }}
+              style={styles.profilePic}
               resizeMode="contain"
             />
           </CardItem>
@@ -157,9 +157,7 @@ const MyProfileScreen = ({ currentUserProfile }) => {
 };
 
 const styles = StyleSheet.create({
-
-
-  publiclyAccessible:{fontSize:12},
+  publiclyAccessible: { fontSize: 12 },
   text: {
     color: '#9D69A3',
     fontWeight: '600',
@@ -177,6 +175,20 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     alignSelf: 'center',
     margin: 5
+  },
+  profilePic:{ height: 200, width: 100, flex: 1 }
+});
+
+MyProfileScreen.navigationOptions = ({ navigation }) => ({
+  title: 'My Profile',
+
+  headerStyle: {
+    backgroundColor: COLOR.header
+  },
+
+  headerTintColor: COLOR.white,
+  headerTitleStyle: {
+    fontWeight: 'bold'
   }
 });
 
