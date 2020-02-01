@@ -10,6 +10,7 @@ import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import ProjectsScreen from '../components/ProjectsScreen';
 import { COLOR } from '../utils/colors';
+import LeaderBoardScreen from '../components/LeaderBoardScreen'
 
 
 const config = Platform.select({
@@ -53,21 +54,21 @@ ProjectsStack.navigationOptions={
 
 ProjectsStack.path = '';
 
-const LinksStack = createStackNavigator(
+const LeaderBoardStack = createStackNavigator(
   {
-    Links: LinksScreen,
+    LeaderBoard: LeaderBoardScreen,
   },
   config
 );
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+LeaderBoardStack.navigationOptions = {
+  tabBarLabel: 'Leader Board',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
   ),
 };
 
-LinksStack.path = '';
+LeaderBoardStack.path = '';
 
 const SettingsStack = createStackNavigator(
   {
@@ -88,11 +89,11 @@ SettingsStack.path = '';
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   ProjectsStack,
-  SettingsStack,
+  LeaderBoardStack,
 },
  
 {
-  initialRouteName: 'ProjectsStack',
+  initialRouteName: 'LeaderBoardStack',
   tabBarOptions: {
     activeTintColor: '#e91e63',
     labelStyle: {

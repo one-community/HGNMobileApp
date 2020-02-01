@@ -30,7 +30,7 @@ import {
 } from 'native-base';
 
 const MyProfileScreen = ({ currentUserProfile }) => {
-  console.log('currentUserProfile', currentUserProfile);
+  // console.log('currentUserProfile', currentUserProfile);
 
   let {
     profilePic,
@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     margin: 5
   },
-  profilePic:{ height: 200, width: 100, flex: 1 }
+  profilePic: { height: 200, width: 100, flex: 1 }
 });
 
 MyProfileScreen.navigationOptions = ({ navigation }) => ({

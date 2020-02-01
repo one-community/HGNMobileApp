@@ -30,7 +30,7 @@ export default combineReducers({
   // userTeamMembers: userTeamMembersReducer,
   // userProjectMembers: userProjectMembersReducer,
   // dashboardData: dashboardDataReducer,
-  // leaderboardData: leaderboardDataReducer,
+   leaderboardData: leaderboardDataReducer,
   // weeklyDashboardData: weeklyDashboardDataReducer,
   // monthlyDashboardData: monthlyDashboardDataReducer,
   // actionItems: actionItemsReducer,

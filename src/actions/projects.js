@@ -8,7 +8,6 @@ import * as types from './../constants/projects';
 import { ENDPOINTS } from '../utils/URL';
 import httpService from '../services/httpService';
 
-
 /*******************************************
  * ACTION CREATORS
  *******************************************/
@@ -20,7 +19,7 @@ export const fetchAllProjects = () => {
   const url = ENDPOINTS.PROJECTS();
   return async dispatch => {
     const res = await httpService.get(url);
-console.log('Result',res.data)
+
     // Dispatch the action object
     await dispatch(getAllProjects(res.data));
   };

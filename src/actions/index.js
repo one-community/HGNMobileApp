@@ -89,18 +89,6 @@ export function getMonthlyDashboardData(userId, fromDate, toDate) {
 	}
 }
 
-export function getLeaderboardData(userId) {
-	const request = httpService.get(`${APIEndpoint}/dashboard/leaderboard/${userId}`)
-
-	return dispatch => {
-		request.then(({ data }) => {
-			dispatch({
-				type: 'GET_LEADERBOARD_DATA',
-				payload: data
-			})
-		})
-	}
-}
 
 export function getActionItems(userId) {
 	const request = httpService.get(`${APIEndpoint}/actionItem/user/${userId}`)

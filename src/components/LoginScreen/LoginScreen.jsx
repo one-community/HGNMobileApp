@@ -23,15 +23,15 @@ import {
 } from 'native-base';
 
 const LoginScreen = props => {
-  const [email, setEmail] = useState('siddharth.gore@live.com');
+  const [email, setEmail] = useState('devAdmin@live.com');
   const [password, setPassword] = useState('Siddharth@123');
 
   const { loginUser, isAuthenticated, navigation } = props;
-  console.log('isAuthenticated', isAuthenticated);
+
 
   useEffect(() => {
     if (isAuthenticated) {
-      console.log('Hey');
+    
 
       // props.navigation.navigate('AuthLoading');
     }

@@ -10,5 +10,6 @@ export const ENDPOINTS = {
   LOGIN: `${APIEndpoint}/login`,
   PROJECTS: () => `${APIEndpoint}/projects/`,
   UPDATE_PASSWORD: userId => `${APIEndpoint}/userprofile/${userId}/updatePassword`,
-  FORCE_PASSWORD: `${APIEndpoint}/forcepassword`
+  FORCE_PASSWORD: `${APIEndpoint}/forcepassword`,
+  LEADER_BOARD: userId => `${APIEndpoint}/dashboard/leaderboard/${userId}`,
 };

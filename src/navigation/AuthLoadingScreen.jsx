@@ -38,7 +38,7 @@ export default class AuthLoadingScreen extends React.Component {
       //console.log('url', userProfileURL);
       let currentUserProfile = await httpService.get(userProfileURL);
       currentUserProfile = { ...currentUserProfile.data, ...decoded };
-      console.log('currentUserProfile', currentUserProfile);
+     // console.log('currentUserProfile', currentUserProfile);
       store.dispatch(setCurrentUser(currentUserProfile));
     }
 
