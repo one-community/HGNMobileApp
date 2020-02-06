@@ -43,6 +43,9 @@ const ProjectsScreen = ({ fetchAllProjects, allProjects }) => {
 
   const url=`https://image-charts.com/chart?cht=p3&chs=400x200&chd=t:${activeProjects},${inActiveProjects}&chl=InActive|Active&chan&chf=ps0-0,lg,45,ffeb3b,0.2,f44336,1|ps0-1,lg,45,8bc34a,0.2,009688,1&chtt=Projects+Status&chts=FF0000,20,r`
 
+
+  // <Card>
+  // <WebView source={{ uri:url}} style={{ height:200}} /></Card>
   return (
     <Container>
       <Content padder>
@@ -58,8 +61,7 @@ const ProjectsScreen = ({ fetchAllProjects, allProjects }) => {
           value={searchText}
         />
 
-        <Card>
-        <WebView source={{ uri:url}} style={{ height:200}} /></Card>
+       
         <List>
           {filteredProjects.map((project, key) => (
             <ListItem key={key}>

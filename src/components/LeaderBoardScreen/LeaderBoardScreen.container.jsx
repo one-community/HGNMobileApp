@@ -8,11 +8,13 @@ import LeaderBoardScreen from './LeaderBoardScreen'
 
 const mapStateToProps = state => {
 
+  console.log('State=Leaderboard container',state)
+
 
   return {
 
     isAuthenticated: _.get(state, 'auth.isAuthenticated',false),
-    leaderboardData: _.get(state, 'leaderboardData',[]),
+    leaderBoardData: _.get(state, 'leaderBoardData',[]),
   
   }
 }

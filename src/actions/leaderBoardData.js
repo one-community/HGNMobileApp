@@ -1,7 +1,8 @@
 import httpService from '../services/httpService'
 import { ENDPOINTS } from '../utils/URL';
 import {getLeaderBoardData as getLeaderBoardDataActionCreator} from '../constants/leaderBoardData'
-export const getLeaderboardData = userId => {
+export const getLeaderboardData = () => {
+  console.log('getLeaderboardData function')
 
 
 
@@ -9,15 +10,15 @@ export const getLeaderboardData = userId => {
 	return async (dispatch,getState) => {
 
     const {auth}=getState()
-    //console.log('User is ---------------',auth.user._id)
+    console.log('User is ---------------',auth.user._id)
 
 
 
     const url = ENDPOINTS.LEADER_BOARD(auth.user._id)
-   // console.log(url)
+    console.log(url)
     const res = await httpService.get(url)
-    
-		console.log('LeaderBoardData', res.data)
+  
+		console.log('LeaderBoardData is ' , res.data)
 
 		await dispatch(getLeaderBoardDataActionCreator(res.data))
   }

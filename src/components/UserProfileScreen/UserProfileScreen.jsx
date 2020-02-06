@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Image ,TouchableOpacity} from 'react-native';
-import * as LocalAuthentication from 'expo-local-authentication';
+import { StyleSheet, Image } from 'react-native';
 
 import { COLOR } from '../../utils/colors';
 import {
@@ -28,10 +27,17 @@ import {
   Separator,
   CheckBox
 } from 'native-base';
-import { Ionicons,MaterialIcons } from '@expo/vector-icons';
+import profilePicTemplate from '../../../assets/images/profilePicTempate.png';
 
-const MyProfileScreen = ({ currentUserProfile }) => {
+const UserProfileScreen = ({ userProfile, getUserProfile, navigation }) => {
   // console.log('currentUserProfile', currentUserProfile);
+
+  const userId = navigation.getParam('userId');
+  console.log('USERID ', userId);
+
+  useEffect(() => {
+    getUserProfile(userId);
+  }, [userProfile]);
 
   let {
     profilePic,
@@ -43,19 +49,28 @@ const MyProfileScreen = ({ currentUserProfile }) => {
     role,
     personalLinks = [],
     adminLinks = []
-  } = currentUserProfile;
-  lastName = 'Gore';
-  firstName = 'Siddharth';
+  } = userProfile;
+  // lastName = 'Gore';
+  // firstName = 'Siddharth';
   return (
     <Container>
       <Content>
         <Card transparent>
           <CardItem>
-            <Image
-              source={{ uri: 'https://avatars2.githubusercontent.com/u/46716162?s=460&v=4' }}
+            {profilePic ? (
+              <Image
+                source={{ uri: profilePic }}
+                style={styles.profilePic}
+                resizeMode="contain"
+              />
+            ) : (
+              <Image
+              source={require('../../../assets/images/profilePicTempate.png')}
               style={styles.profilePic}
               resizeMode="contain"
-            />
+               
+              />
+            )}
           </CardItem>
           <CardItem>
             <Body>
@@ -69,14 +84,12 @@ const MyProfileScreen = ({ currentUserProfile }) => {
 
         <List>
           <ListItem itemDivider>
-           <MaterialIcons size={32} name='email' color='green'/>
+            <Text>Email:</Text>
           </ListItem>
           <ListItem>
             <Left>
-            
-            <Text style={styles.text}>{email}</Text>
+              <Text style={styles.text}>{email}</Text>
             </Left>
-    
             <Right>
               <Text style={styles.publiclyAccessible}>Publicly Accessible?</Text>
             </Right>
@@ -84,7 +97,7 @@ const MyProfileScreen = ({ currentUserProfile }) => {
           </ListItem>
 
           <ListItem itemDivider>
-          <MaterialIcons size={32} name='phone' color='green'/>
+            <Text>Phone Number:</Text>
           </ListItem>
           <ListItem>
             <Left>
@@ -182,26 +195,17 @@ const styles = StyleSheet.create({
   profilePic: { height: 200, width: 100, flex: 1 }
 });
 
-MyProfileScreen.navigationOptions = ({ navigation }) => ({
+UserProfileScreen.navigationOptions = ({ navigation }) => ({
   title: 'My Profile',
 
   headerStyle: {
-    //backgroundColor: COLOR.header
+    backgroundColor: COLOR.header
   },
-  headerRightContainerStyle: {
-    paddingRight: 10
-  },
-  headerRight: (
-    <TouchableOpacity onPress={() => navigation.navigate("storiesList")}>
-      <Ionicons name="ios-search" size={25} color="white" left={20} />
-    </TouchableOpacity>
-  )
 
-,
-  // headerTintColor: COLOR.white,
+  headerTintColor: COLOR.white,
   headerTitleStyle: {
     fontWeight: 'bold'
   }
 });
 
-export default MyProfileScreen;
+export default UserProfileScreen;

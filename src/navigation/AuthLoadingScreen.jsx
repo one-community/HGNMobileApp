@@ -19,7 +19,7 @@ export default class AuthLoadingScreen extends React.Component {
   // Fetch the token from storage then navigate to our appropriate place
   _bootstrapAsync = async () => {
     //console.log('_bootstrap function')
-    //await AsyncStorage.removeItem(tokenKey)
+  //await AsyncStorage.removeItem(tokenKey)
     const userToken = await AsyncStorage.getItem(tokenKey);
     //console.log('userToken', userToken);
     if (userToken) {

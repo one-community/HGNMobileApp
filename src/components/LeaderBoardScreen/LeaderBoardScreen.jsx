@@ -25,18 +25,38 @@ import {
   Thumbnail
 } from 'native-base';
 
-const LeaderBoardScreen = ({ getLeaderboardData, leaderboardData }) => {
- console.log('Leaderborad data',leaderboardData)
+const LeaderBoardScreen = ({ getLeaderboardData, leaderBoardData,navigation }) => {
+  console.log('Leaderborad data', leaderBoardData);
 
   useEffect(() => {
     getLeaderboardData();
-  }, [leaderboardData.length]);
+  }, [leaderBoardData.length]);
+
+  const handlePress = personId => {
+    console.log('Person Id ', personId);
+
+    navigation.navigate('UserProfile', {
+      userId: personId,
+      
+    });
+  };
 
   return (
     <Container>
-      <Content padder>
+      <Content padder  contentContainerStyle={styles.content}>
         <List>
-          {leaderboardData.map((rowData,key) => (
+        <ListItem itemHeader thumbnail >
+        <Left>
+        <Badge>
+        <Text>Hours</Text>
+      </Badge>
+        </Left>
+        <Body><Text>Name</Text></Body>
+        <Right>
+  <Text>Action</Text>
+        </Right>
+      </ListItem>
+          {leaderBoardData.map((rowData, key) => (
             <ListItem thumbnail key={key}>
               <Left>
                 <Badge>
@@ -44,13 +64,13 @@ const LeaderBoardScreen = ({ getLeaderboardData, leaderboardData }) => {
                 </Badge>
               </Left>
               <Body>
-                <Text>{rowData.name}</Text>
-                <Text note numberOfLines={1}>
-                  Its time to build a difference . .
+                <Text style={styles.name}>{rowData.name}</Text>
+                <Text style={styles.subText} note numberOfLines={1}>
+                  Weekly Commited Hours: {rowData.weeklyComittedHours}
                 </Text>
               </Body>
               <Right>
-                <Button transparent>
+                <Button transparent onPress={() => handlePress(rowData.personId)}>
                   <Text>View</Text>
                 </Button>
               </Right>
@@ -58,29 +78,22 @@ const LeaderBoardScreen = ({ getLeaderboardData, leaderboardData }) => {
           ))}
         </List>
       </Content>
-      <Footer>
-        <FooterTab>
-          <Button full>
-            <Text>© 2020 One Community Global</Text>
-          </Button>
-        </FooterTab>
-      </Footer>
+ 
     </Container>
   );
 };
 
 const styles = StyleSheet.create({
   content: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-evenly'
+    
+    backgroundColor:'#353535'
   },
-  pageTitle: {
-    fontFamily: 'space-mono',
+  name: {
+
     fontWeight: 'bold',
-    fontSize: 30,
-    color: '#55505C',
-    alignSelf: 'center'
+    fontSize: 18,
+    color: '#edd500',
+   
   },
   logo: {
     width: 215,
@@ -88,12 +101,26 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: 10
   },
-  label: {
+  subText: {
     fontSize: 16,
-    fontWeight: '800',
-    color: COLOR.labelFontColor
+    
+    color: COLOR.white
   },
   input: { color: 'black', fontFamily: 'space-mono' }
+});
+
+
+LeaderBoardScreen.navigationOptions = ({ navigation }) => ({
+  title: 'Leader Board',
+
+  headerStyle: {
+    backgroundColor: COLOR.header
+  },
+
+  headerTintColor: COLOR.white,
+  headerTitleStyle: {
+    fontWeight: 'bold'
+  }
 });
 
 export default LeaderBoardScreen;

@@ -25,12 +25,12 @@ import { errorsReducer } from './errorsReducer';
 
 export default combineReducers({
   auth: authReducer,
-  //userProfile: userProfileByIdReducer,
+  userProfile: userProfileByIdReducer,
   // allUserProfiles: allUserProfilesReducer,
   // userTeamMembers: userTeamMembersReducer,
   // userProjectMembers: userProjectMembersReducer,
   // dashboardData: dashboardDataReducer,
-   leaderboardData: leaderboardDataReducer,
+  leaderBoardData: leaderboardDataReducer,
   // weeklyDashboardData: weeklyDashboardDataReducer,
   // monthlyDashboardData: monthlyDashboardDataReducer,
   // actionItems: actionItemsReducer,

@@ -1,7 +1,8 @@
-export const leaderboardDataReducer = (leaderboardData = null, action) => {
-  if (action.type === 'GET_LEADERBOARD_DATA') {
+import {GET_LEADERBOARD_DATA} from '../constants/leaderBoardData'
+export const leaderboardDataReducer = (leaderBoardData = [1,2,3], action) => {
+  if (action.type === GET_LEADERBOARD_DATA) {
     return action.payload;
   }
 
-  return leaderboardData;
+  return leaderBoardData;
 };
