@@ -77,13 +77,15 @@ LeaderBoardStack.path = '';
 
 
 const tabNavigator = createBottomTabNavigator({
-  HomeStack,
-  ProjectsStack,
   LeaderBoardStack,
+  ProjectsStack,
+  HomeStack,
+
+ 
 },
  
 {
-  initialRouteName: 'HomeStack',
+  initialRouteName: 'LeaderBoardStack',
   tabBarOptions: {
     activeTintColor: '#e91e63',
     labelStyle: {

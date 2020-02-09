@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-import { loginUser } from '../../actions/authActions';
+import { loginUser,logoutUser } from '../../actions/authActions';
 
 import MyProfileScreen from './MyProfileScreen';
 
 const mapStateToProps = state => {
-  console.log('state is ',state)
+  //console.log('state is ',state)
   return {
     // auth: state.auth,
     // userProfile: _.get(state, 'userProfile'),

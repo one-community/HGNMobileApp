@@ -33,7 +33,7 @@ const UserProfileScreen = ({ userProfile, getUserProfile, navigation }) => {
   // console.log('currentUserProfile', currentUserProfile);
 
   const userId = navigation.getParam('userId');
-  console.log('USERID ', userId);
+ // console.log('USERID ', userId);
 
   useEffect(() => {
     getUserProfile(userId);

@@ -26,14 +26,14 @@ import {
 } from 'native-base';
 
 const LeaderBoardScreen = ({ getLeaderboardData, leaderBoardData,navigation }) => {
-  console.log('Leaderborad data', leaderBoardData);
+  //console.log('Leaderborad data', leaderBoardData);
 
   useEffect(() => {
     getLeaderboardData();
   }, [leaderBoardData.length]);
 
   const handlePress = personId => {
-    console.log('Person Id ', personId);
+   // console.log('Person Id ', personId);
 
     navigation.navigate('UserProfile', {
       userId: personId,

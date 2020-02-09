@@ -42,8 +42,9 @@ export const setCurrentUser = decoded => ({
   payload: decoded
 });
 
-export const logoutUser = () => dispatch => {
-  localStorage.removeItem(tokenKey);
+export const logoutUser = () => async dispatch => {
+
+  await AsyncStorage.removeItem(tokenKey);
   httpService.setjwt(false);
   dispatch(setCurrentUser(null));
 };

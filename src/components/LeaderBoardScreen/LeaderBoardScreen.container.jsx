@@ -8,7 +8,7 @@ import LeaderBoardScreen from './LeaderBoardScreen'
 
 const mapStateToProps = state => {
 
-  console.log('State=Leaderboard container',state)
+ // console.log('State=Leaderboard container',state)
 
 
   return {

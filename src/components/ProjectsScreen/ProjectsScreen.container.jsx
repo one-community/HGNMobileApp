@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-import { fetchAllProjects } from '../../actions/projects';
+import { fetchAllProjects,postNewProject,deleteProject } from '../../actions/projects';
 
 import ProjectsScreen from './ProjectsScreen';
 
@@ -12,5 +12,5 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {
-  fetchAllProjects
+  fetchAllProjects,postNewProject,deleteProject
 })(ProjectsScreen);

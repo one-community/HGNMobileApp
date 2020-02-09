@@ -193,7 +193,7 @@ MyProfileScreen.navigationOptions = ({ navigation }) => ({
   },
   headerRight: (
     <TouchableOpacity onPress={() => navigation.navigate("storiesList")}>
-      <Ionicons name="ios-search" size={25} color="white" left={20} />
+      <Ionicons name="ios-search" size={25} color="blue" left={20} />
     </TouchableOpacity>
   )
 
