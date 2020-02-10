@@ -10,7 +10,7 @@ export const getLeaderboardData = () => {
 	return async (dispatch,getState) => {
 
     const {auth}=getState()
-    console.log('User is ---------------',auth.user._id)
+    //console.log('User is ---------------',auth.user._id)
 
 
 
@@ -18,7 +18,7 @@ export const getLeaderboardData = () => {
     console.log(url)
     const res = await httpService.get(url)
   
-		console.log('LeaderBoardData is ' , res.data)
+		//console.log('LeaderBoardData is ' , res.data)
 
 		await dispatch(getLeaderBoardDataActionCreator(res.data))
   }

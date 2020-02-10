@@ -25,6 +25,9 @@ import {
   Thumbnail
 } from 'native-base';
 
+
+
+
 const LeaderBoardScreen = ({ getLeaderboardData, leaderBoardData,navigation }) => {
   //console.log('Leaderborad data', leaderBoardData);
 
