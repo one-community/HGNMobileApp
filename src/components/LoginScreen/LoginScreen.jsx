@@ -29,13 +29,13 @@ const LoginScreen = props => {
   const { loginUser, isAuthenticated, navigation } = props;
 
 
-  useEffect(() => {
-    if (isAuthenticated) {
+  // useEffect(() => {
+  //   if (isAuthenticated) {
     
 
-      // props.navigation.navigate('AuthLoading');
-    }
-  }, [props.isAuthenticated]);
+  //     // props.navigation.navigate('AuthLoading');
+  //   }
+  // }, [props.isAuthenticated]);
 
   // useEffect(() => {
   //   const checkAuth = async () => {

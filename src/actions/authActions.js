@@ -13,17 +13,17 @@ export const loginUser = (credentials, navigation) => async dispatch => {
       dispatch(setCurrentUser({ new: true, userId: res.data.userId }));
     } else {
       await AsyncStorage.setItem(tokenKey, result.data.token);
-      navigation.navigate('AuthLoading');
+      //navigation.push('Main');
 
-      // httpService.setjwt(result.data.token);
-      //const decoded = jwtDecode(result.data.token);
-      // console.log('userid',decoded.userid)
-      //const userProfileURL = ENDPOINTS.USER_PROFILE(decoded.userid)
-      // console.log('url',userProfileURL)
-      //let currentUserProfile=await httpService.get(userProfileURL)
+      httpService.setjwt(result.data.token);
+      const decoded = jwtDecode(result.data.token);
+      console.log('userid',decoded.userid)
+      const userProfileURL = ENDPOINTS.USER_PROFILE(decoded.userid)
+      console.log('url',userProfileURL)
+     // let currentUserProfile=await httpService.get(userProfileURL)
       //currentUserProfile={...currentUserProfile.data,...decoded}
-      // console.log('currentUserProfile', currentUserProfile);
-      //dispatch(setCurrentUser(decoded));
+     // console.log('currentUserProfile', currentUserProfile);
+      dispatch(setCurrentUser(decoded));
     }
   } catch (err) {
     console.log('Error', err);
@@ -43,7 +43,7 @@ export const setCurrentUser = decoded => ({
 });
 
 export const logoutUser = () => async dispatch => {
-
+  console.log('Error');
   await AsyncStorage.removeItem(tokenKey);
   httpService.setjwt(false);
   dispatch(setCurrentUser(null));
