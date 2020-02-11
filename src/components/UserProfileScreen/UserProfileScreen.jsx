@@ -29,15 +29,15 @@ import {
 } from 'native-base';
 import profilePicTemplate from '../../../assets/images/profilePicTempate.png';
 
-const UserProfileScreen = ({ userProfile, getUserProfile, navigation }) => {
+const UserProfileScreen = ({ userProfile, getUserProfile, navigation ,route}) => {
   // console.log('currentUserProfile', currentUserProfile);
 
-  const userId = navigation.getParam('userId');
- // console.log('USERID ', userId);
+  const userId = route.params.userId;
+  //console.log('USERID ', userId);
 
   useEffect(() => {
     getUserProfile(userId);
-  }, [userProfile]);
+  }, [userId]);
 
   let {
     profilePic,

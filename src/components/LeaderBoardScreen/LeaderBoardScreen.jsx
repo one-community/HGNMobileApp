@@ -29,12 +29,21 @@ import { AntDesign } from '@expo/vector-icons';
 
 
 
-const LeaderBoardScreen = ({ getLeaderboardData, leaderBoardData,navigation ,logoutUser}) => {
+const LeaderBoardScreen = ({ getLeaderboardData, leaderBoardData,navigation ,logoutUser,auth}) => {
+
+  const loggedInUserId=auth.user._id
+
+  
 
 
   useEffect(() => {
-    getLeaderboardData();
-  }, [leaderBoardData.length]);
+    if(loggedInUserId)
+    {
+      getLeaderboardData(loggedInUserId);
+
+    }
+  
+  }, [loggedInUserId]);
 
   const handlePress = personId => {
 
@@ -121,17 +130,6 @@ const styles = StyleSheet.create({
 });
 
 
-LeaderBoardScreen.navigationOptions = ({ navigation }) => ({
-  title: 'Leader Board',
 
-  headerStyle: {
-    backgroundColor: COLOR.header
-  },
-
-  headerTintColor: COLOR.white,
-  headerTitleStyle: {
-    fontWeight: 'bold'
-  }
-});
 
 export default LeaderBoardScreen;

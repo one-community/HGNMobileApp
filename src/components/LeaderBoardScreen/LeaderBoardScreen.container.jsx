@@ -14,7 +14,7 @@ const mapStateToProps = state => {
 
   return {
 
-    auth: _.get(state, 'auth',false),
+    auth: _.get(state, 'auth',{}),
     leaderBoardData: _.get(state, 'leaderBoardData',[]),
   
   }

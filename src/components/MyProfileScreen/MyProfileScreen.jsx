@@ -191,26 +191,6 @@ const styles = StyleSheet.create({
   profilePic: { height: 200, width: 100, flex: 1 }
 });
 
-MyProfileScreen.navigationOptions = ({ navigation }) => ({
-  title: 'My Profile',
 
-  headerStyle: {
-    //backgroundColor: COLOR.header
-  },
-  headerRightContainerStyle: {
-    paddingRight: 10
-  },
-  headerRight: (
-    <TouchableOpacity onPress={() => navigation.navigate("storiesList")}>
-      <Ionicons name="ios-search" size={25} color="blue" left={20} />
-    </TouchableOpacity>
-  )
-
-,
-  // headerTintColor: COLOR.white,
-  headerTitleStyle: {
-    fontWeight: 'bold'
-  }
-});
 
 export default MyProfileScreen;

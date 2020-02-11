@@ -35,10 +35,10 @@ export default combineReducers({
   // monthlyDashboardData: monthlyDashboardDataReducer,
   // actionItems: actionItemsReducer,
   // notifications: notificationsReducer,
-  allProjects: allProjectsReducer
+  allProjects: allProjectsReducer,
   // project: projectByIdReducer,
   // userProjects: projectsByUserReducer,
-  // projectMembers: projectMembershipReducer,
+   projectMembers: projectMembershipReducer,
   // allTeams: allTeamsReducer,
   // team: teamByIdReducer,
   // teamMembers: teamMembershipReducer,

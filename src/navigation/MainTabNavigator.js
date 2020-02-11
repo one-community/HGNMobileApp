@@ -10,6 +10,7 @@ import { COLOR } from '../utils/colors';
 import LeaderBoardScreen from '../components/LeaderBoardScreen';
 import UserProfileScreen from '../components/UserProfileScreen';
 import TimerScreen from '../components/TimerScreen';
+import Project from '../components/Project'
 
 
 import { tokenKey } from '../../config';
@@ -89,6 +90,8 @@ const Projects = () => {
       }}
     >
       <ProjectsStack.Screen name="Projects" component={ProjectsScreen} />
+      <ProjectsStack.Screen name="Project" component={Project} />
+      <LeaderBoardStack.Screen name="UserProfile" component={UserProfileScreen} />
     </ProjectsStack.Navigator>
   );
 };
@@ -122,7 +125,7 @@ const MainTabNavigator = () => {
           if (route.name === 'LeaderBoard') {
             iconName = focused ? 'ios-list-box' : 'ios-list';
           } else if (route.name === 'Projects') {
-            iconName = focused ? 'ios-list-box' : 'ios-list';
+            iconName = focused ? 'ios-document' : 'ios-document';
           } 
           else if (route.name === 'TimeEntry') {
             iconName = focused ? 'ios-time' : 'ios-time';

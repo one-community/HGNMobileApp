@@ -22,15 +22,52 @@ import { SearchBar } from 'react-native-elements';
 import { COLOR } from '../../utils/colors';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 
-import ModalScreen from '../ModalScreen'
-
 import _ from 'lodash';
 
-const ProjectsScreen = ({ fetchAllProjects, allProjects, postNewProject,deleteProject ,navigation,logoutUser}) => {
+
+const Project=({route,fetchAllMembers,projectMembers,navigation})=>{
+
+const projectId=route.params.projectId
+
+
+
+useEffect(() => {
+  fetchAllMembers(projectId);
+
+}, [projectId]);
+
+console.log(projectMembers)
+//fetchAllMembers
+
+  return (<Container><Content><Text>Project Screen</Text>
+    
+    
+
+    <List>
+    {projectMembers.map((member, key) => (
+      <ListItem key={key}>
+        <Body>
+          <Text style={styles.projectText}>{member.firstName} {member.lastName}</Text>
+
+        </Body>
+        <Right>
+          <Button bordered primary onPress={()=>navigation.navigate('UserProfile', {
+            userId: member._id,
+            
+          })}>
+            <Text>View</Text>
+          </Button>
+        </Right>
+      </ListItem>
+    ))}
+  </List>
+    
+    </Content></Container>)
+}
+
+const Project1 = ({ fetchAllProjects, allProjects, postNewProject,deleteProject ,navigation,logoutUser}) => {
   const [filteredProjects, setFilteredProjects] = useState(allProjects);
   const [newProjectName, setNewProjectName] = useState('');
-
-  const [modalVisible,setModalVisible]=useState(false)
 
   const [searchText, setSearchText] = useState('');
   useEffect(() => {
@@ -61,7 +98,6 @@ const ProjectsScreen = ({ fetchAllProjects, allProjects, postNewProject,deletePr
 
   return (
     <Container>
-  {modalVisible&& <ModalScreen text='Are you sure you want to delete the project?' buttonHandlerCancel={setModalVisible} />} 
       <Content padder>
         <SearchBar
           round
@@ -102,19 +138,11 @@ const ProjectsScreen = ({ fetchAllProjects, allProjects, postNewProject,deletePr
                   <Text style={styles.inActive}>Inactive</Text>
                 )}
               </Body>
-             
-
-              <Button bordered success onPress={()=>navigation.navigate('Project', {
-                projectId: project._id,
-                
-              })} >
-              <Text>View</Text>
-            </Button>
-
-                <Button style={{marginLeft:5}} bordered danger onPress={()=>setModalVisible(true)}>
+              <Right>
+                <Button bordered danger onPress={()=>deleteProject(project._id)}>
                   <Text>Delete</Text>
                 </Button>
-          
+              </Right>
             </ListItem>
           ))}
         </List>
@@ -136,16 +164,5 @@ const styles = StyleSheet.create({
   active: { color: 'green', fontFamily: 'space-mono', fontSize: 14 }
 });
 
-ProjectsScreen.navigationOptions = ({ navigation }) => ({
-  title: 'My Projects',
 
-  headerStyle: {
-    backgroundColor: COLOR.header
-  },
-
-  headerTintColor: COLOR.white,
-  headerTitleStyle: {
-    fontWeight: 'bold'
-  }
-});
-export default ProjectsScreen;
+export default Project;
