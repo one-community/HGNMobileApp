@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image,TouchableOpacity } from 'react-native';
 
 import { COLOR } from '../../utils/colors';
 import {
@@ -24,25 +24,33 @@ import {
   ListItem,
   Thumbnail
 } from 'native-base';
+import { AntDesign } from '@expo/vector-icons';
 
 
 
 
-const LeaderBoardScreen = ({ getLeaderboardData, leaderBoardData,navigation }) => {
-  //console.log('Leaderborad data', leaderBoardData);
+const LeaderBoardScreen = ({ getLeaderboardData, leaderBoardData,navigation ,logoutUser}) => {
+
 
   useEffect(() => {
     getLeaderboardData();
   }, [leaderBoardData.length]);
 
   const handlePress = personId => {
-   // console.log('Person Id ', personId);
+
 
     navigation.navigate('UserProfile', {
       userId: personId,
       
     });
   };
+  navigation.setOptions({
+    headerRight: () => (
+      <TouchableOpacity onPress={() => logoutUser()} style={{marginRight:10}}>
+      <AntDesign name="logout" size={32} color="red"  />
+    </TouchableOpacity>
+    ),
+  });
 
   return (
     <Container>
@@ -54,9 +62,9 @@ const LeaderBoardScreen = ({ getLeaderboardData, leaderBoardData,navigation }) =
         <Text>Hours</Text>
       </Badge>
         </Left>
-        <Body><Text>Name</Text></Body>
+        <Body><Text style={{color:'white',fontWeight:'bold'}}>Name</Text></Body>
         <Right>
-  <Text>Action</Text>
+  <Text style={{color:'white',fontWeight:'bold'}}>Action</Text>
         </Right>
       </ListItem>
           {leaderBoardData.map((rowData, key) => (

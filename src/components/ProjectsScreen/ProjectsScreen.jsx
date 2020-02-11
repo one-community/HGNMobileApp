@@ -21,9 +21,10 @@ import { StyleSheet,TouchableOpacity } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import { COLOR } from '../../utils/colors';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
+
 import _ from 'lodash';
 
-const ProjectsScreen = ({ fetchAllProjects, allProjects, postNewProject,deleteProject }) => {
+const ProjectsScreen = ({ fetchAllProjects, allProjects, postNewProject,deleteProject ,navigation,logoutUser}) => {
   const [filteredProjects, setFilteredProjects] = useState(allProjects);
   const [newProjectName, setNewProjectName] = useState('');
 
@@ -45,10 +46,15 @@ const ProjectsScreen = ({ fetchAllProjects, allProjects, postNewProject,deletePr
     setFilteredProjects(filtered);
   };
 
-  //const url = `https://image-charts.com/chart?cht=p3&chs=400x200&chd=t:${activeProjects},${inActiveProjects}&chl=InActive|Active&chan&chf=ps0-0,lg,45,ffeb3b,0.2,f44336,1|ps0-1,lg,45,8bc34a,0.2,009688,1&chtt=Projects+Status&chts=FF0000,20,r`;
+  navigation.setOptions({
+    headerRight: () => (
+      <TouchableOpacity onPress={() => logoutUser()} style={{marginRight:10}}>
+      <AntDesign name="logout" size={32} color="red"  />
+    </TouchableOpacity>
+    ),
+  });
 
-  // <Card>
-  // <WebView source={{ uri:url}} style={{ height:200}} /></Card>
+
   return (
     <Container>
       <Content padder>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Image ,TouchableOpacity} from 'react-native';
-import * as LocalAuthentication from 'expo-local-authentication';
-
+import { AntDesign } from '@expo/vector-icons';
 import { COLOR } from '../../utils/colors';
 import {
   Container,
@@ -30,7 +29,7 @@ import {
 } from 'native-base';
 import { Ionicons,MaterialIcons } from '@expo/vector-icons';
 
-const MyProfileScreen = ({ currentUserProfile }) => {
+const MyProfileScreen = ({ currentUserProfile,navigation ,logoutUser}) => {
   // console.log('currentUserProfile', currentUserProfile);
 
   let {
@@ -44,8 +43,18 @@ const MyProfileScreen = ({ currentUserProfile }) => {
     personalLinks = [],
     adminLinks = []
   } = currentUserProfile;
-  lastName = 'Gore';
-  firstName = 'Siddharth';
+  navigation.setOptions({
+    headerRight: () => (
+      <TouchableOpacity onPress={() => logoutUser()} style={{marginRight:10}}>
+      <AntDesign name="logout" size={32} color="red"  />
+    </TouchableOpacity>
+    ),
+  });
+
+
+
+
+
   return (
     <Container>
       <Content>
