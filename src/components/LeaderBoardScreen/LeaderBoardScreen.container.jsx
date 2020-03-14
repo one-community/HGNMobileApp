@@ -1,25 +1,19 @@
-import { connect } from 'react-redux'
-import _ from 'lodash'
+import { connect } from 'react-redux';
+import _ from 'lodash';
 
-import { getLeaderboardData } from "../../actions/leaderBoardData"
+import { getLeaderboardData } from '../../actions/leaderBoardData';
 import { setCurrentUser, logoutUser } from '../../actions/authActions';
 
-
-import LeaderBoardScreen from './LeaderBoardScreen'
+import LeaderBoardScreen from './LeaderBoardScreen';
 
 const mapStateToProps = state => {
-
- // console.log('State=Leaderboard container',state)
-
-
   return {
-
-    auth: _.get(state, 'auth',{}),
-    leaderBoardData: _.get(state, 'leaderBoardData',[]),
-  
-  }
-}
+    auth: _.get(state, 'auth', {}),
+    leaderBoardData: _.get(state, 'leaderBoardData', [])
+  };
+};
 
 export default connect(mapStateToProps, {
-  getLeaderboardData,logoutUser
-})(LeaderBoardScreen)
+  getLeaderboardData,
+  logoutUser
+})(LeaderBoardScreen);

@@ -2,17 +2,17 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 
 import { fetchAllProjects,postNewProject,deleteProject } from '../../actions/projects';
-import {fetchAllMembers} from '../../actions/projectMembers'
+import {getAllUserProfiles} from '../../actions/allUserProfiles'
 import { loginUser,logoutUser } from '../../actions/authActions';
-import Project from './Project';
+import UsersList from './UsersList';
 
 const mapStateToProps = state => {
- 
+  console.log('projectMembers is Project Container',state)
   return {
-    projectMembers: _.get(state, 'projectMembers.members', [])
+    allUserProfiles: _.get(state, 'allUserProfiles', [])
   };
 };
 
 export default connect(mapStateToProps, {
-  fetchAllMembers,deleteProject,logoutUser
-})(Project);
+  getAllUserProfiles,logoutUser
+})(UsersList);

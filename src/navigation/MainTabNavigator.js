@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, Text, Button, Image,AsyncStorage } from 'react-native';
+import { View, Text, Button, Image, AsyncStorage } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import TabBarIcon from '../../components/TabBarIcon';
@@ -10,56 +10,44 @@ import { COLOR } from '../utils/colors';
 import LeaderBoardScreen from '../components/LeaderBoardScreen';
 import UserProfileScreen from '../components/UserProfileScreen';
 import TimerScreen from '../components/TimerScreen';
-import Project from '../components/Project'
-
+import Project from '../components/Project';
+import UsersList from '../components/UsersList'
 
 import { tokenKey } from '../../config';
 import { setCurrentUser, logoutUser } from '../actions/authActions';
 
-
-
 const MyProfileStack = createStackNavigator();
 const ProjectsStack = createStackNavigator();
 const LeaderBoardStack = createStackNavigator();
-const TimeEntryStack= createStackNavigator();
+const TimeEntryStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-
-
-
-
-const TimeEntry=()=><TimeEntryStack.Navigator     screenOptions={({ navigation, route })=>({
-
-
-  headerStyle: {
-    backgroundColor: COLOR.header
-  },
-  headerTintColor: '#fff',
-  headerTitleStyle: {
-    fontWeight: 'bold'
-  }
-})}>
-
-<TimeEntryStack.Screen
-name="TimeEntry"
-component={TimerScreen}
-options={{ title: 'Add Time' }}
-/>
-
-
-</TimeEntryStack.Navigator>
-
-
-
+const TimeEntry = () => (
+  <TimeEntryStack.Navigator
+    screenOptions={({ navigation, route }) => ({
+      headerStyle: {
+        backgroundColor: COLOR.HGN_DARK_BLUE
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold'
+      }
+    })}
+  >
+    <TimeEntryStack.Screen
+      name="TimeEntry"
+      component={TimerScreen}
+      options={{ title: 'Add Time' }}
+    />
+  </TimeEntryStack.Navigator>
+);
 
 const MyProfile = () => {
   return (
     <MyProfileStack.Navigator
-      screenOptions={({ navigation, route })=>({
-
-    
+      screenOptions={({ navigation, route }) => ({
         headerStyle: {
-          backgroundColor: COLOR.header
+          backgroundColor: COLOR.HGN_DARK_BLUE
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
@@ -81,7 +69,7 @@ const Projects = () => {
     <ProjectsStack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: COLOR.header
+          backgroundColor: COLOR.HGN_SILVER
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
@@ -91,7 +79,8 @@ const Projects = () => {
     >
       <ProjectsStack.Screen name="Projects" component={ProjectsScreen} />
       <ProjectsStack.Screen name="Project" component={Project} />
-      <LeaderBoardStack.Screen name="UserProfile" component={UserProfileScreen} />
+      <ProjectsStack.Screen name="UserProfile" component={UserProfileScreen} />
+      <ProjectsStack.Screen name="UsersList" component={UsersList} />
     </ProjectsStack.Navigator>
   );
 };
@@ -101,7 +90,7 @@ const LeaderBoard = () => {
     <LeaderBoardStack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: COLOR.header
+          backgroundColor: COLOR.HGN_DARK_BLUE
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
@@ -126,11 +115,9 @@ const MainTabNavigator = () => {
             iconName = focused ? 'ios-list-box' : 'ios-list';
           } else if (route.name === 'Projects') {
             iconName = focused ? 'ios-document' : 'ios-document';
-          } 
-          else if (route.name === 'TimeEntry') {
+          } else if (route.name === 'TimeEntry') {
             iconName = focused ? 'ios-time' : 'ios-time';
-          }
-          else {
+          } else {
             iconName = focused ? 'ios-information-circle' : 'ios-information-circle-outline';
           }
 
@@ -141,7 +128,7 @@ const MainTabNavigator = () => {
         activeTintColor: 'tomato',
         inactiveTintColor: 'gray',
         style: {
-          backgroundColor: COLOR.header
+          backgroundColor: COLOR.HGN_DARK_BLUE
         }
       }}
     >

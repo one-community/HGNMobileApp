@@ -27,7 +27,7 @@ import {
   Separator,
   CheckBox
 } from 'native-base';
-import profilePicTemplate from '../../../assets/images/profilePicTempate.png';
+
 
 const UserProfileScreen = ({ userProfile, getUserProfile, navigation ,route}) => {
   // console.log('currentUserProfile', currentUserProfile);

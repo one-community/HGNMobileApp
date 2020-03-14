@@ -17,135 +17,83 @@ import {
   Input,
   Icon
 } from 'native-base';
-import { StyleSheet,TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import { COLOR } from '../../utils/colors';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 
 import _ from 'lodash';
 
+const Project = ({ route, fetchAllMembers, projectMembers, navigation }) => {
+  const projectId = route.params.projectId;
 
-const Project=({route,fetchAllMembers,projectMembers,navigation})=>{
-
-const projectId=route.params.projectId
-
-
-
-useEffect(() => {
-  fetchAllMembers(projectId);
-
-}, [projectId]);
-
-console.log(projectMembers)
-//fetchAllMembers
-
-  return (<Container><Content><Text>Project Screen</Text>
-    
-    
-
-    <List>
-    {projectMembers.map((member, key) => (
-      <ListItem key={key}>
-        <Body>
-          <Text style={styles.projectText}>{member.firstName} {member.lastName}</Text>
-
-        </Body>
-        <Right>
-          <Button bordered primary onPress={()=>navigation.navigate('UserProfile', {
-            userId: member._id,
-            
-          })}>
-            <Text>View</Text>
-          </Button>
-        </Right>
-      </ListItem>
-    ))}
-  </List>
-    
-    </Content></Container>)
-}
-
-const Project1 = ({ fetchAllProjects, allProjects, postNewProject,deleteProject ,navigation,logoutUser}) => {
-  const [filteredProjects, setFilteredProjects] = useState(allProjects);
-  const [newProjectName, setNewProjectName] = useState('');
-
-  const [searchText, setSearchText] = useState('');
   useEffect(() => {
-    fetchAllProjects();
-    setFilteredProjects(allProjects);
-  }, [allProjects.length]);
-
-  //const inActiveProjects = allProjects.filter(project => project.isActive === true).length;
-  //const activeProjects = allProjects.length - inActiveProjects;
-
-  const handleSearch = searchText => {
-    setSearchText(searchText);
-    const filtered = allProjects.filter(project =>
-      project.projectName.toLowerCase().includes(searchText.toLowerCase())
-    );
-
-    setFilteredProjects(filtered);
-  };
+    fetchAllMembers(projectId);
+  }, [projectId]);
 
   navigation.setOptions({
     headerRight: () => (
-      <TouchableOpacity onPress={() => logoutUser()} style={{marginRight:10}}>
-      <AntDesign name="logout" size={32} color="red"  />
-    </TouchableOpacity>
-    ),
+      <Button iconLeft light transparent onPress={() => navigation.navigate('UsersList')}>
+        <Icon name="add" />
+        <Text>Add Member</Text>
+      </Button>
+    )
   });
 
+  //fetchAllMembers
 
   return (
     <Container>
       <Content padder>
-        <SearchBar
-          round
-          clearIcon
-          platform="default"
-          showCancel
-          lightTheme
-          placeholder="Search projects..."
-          containerStyle={{ backgroundColor: 'white' }}
-          onChangeText={value => handleSearch(value)}
-          value={searchText}
-        />
-
-        <Card>
-          <CardItem bordered>
-            <Input placeholder="Add a new Project"  onChangeText={(value)=>setNewProjectName(value)}/>
-            <Right>
-            <TouchableOpacity onPress={()=>postNewProject(newProjectName,true)} disabled={newProjectName.length<=0}>
-            <AntDesign name="pluscircleo" size={32} color="#377fff" />
-            </TouchableOpacity>
-            
-            </Right>
-          </CardItem>
-      
-        </Card>
-
-        <List>
-          {filteredProjects.map((project, key) => (
-            <ListItem key={key}>
-              <Body>
-                <Text style={styles.projectText}>{project.projectName}</Text>
-
-                {project.isActive ? (
-                  <Text note numberOfLines={1} style={styles.active}>
-                    Active
+        {projectMembers.length ? (
+          <List>
+          <ListItem itemDivider>
+          <Text>Project Members</Text>
+        </ListItem> 
+            {projectMembers.map((member, key) => (
+              <ListItem key={key}>
+                <Body>
+                  <Text style={styles.projectText}>
+                    {member.firstName} {member.lastName}
                   </Text>
-                ) : (
-                  <Text style={styles.inActive}>Inactive</Text>
-                )}
-              </Body>
-              <Right>
-                <Button bordered danger onPress={()=>deleteProject(project._id)}>
-                  <Text>Delete</Text>
+                </Body>
+              
+                  <Button
+                    bordered
+                    primary
+                    onPress={() =>
+                      navigation.navigate('UserProfile', {
+                        userId: member._id
+                      })
+                    }
+                  >
+                    <Text>View</Text>
+                  </Button>
+                  <Button
+                  style={{marginLeft:10}}
+                  bordered
+                  danger
+           
+                >
+                  <Text>Remove</Text>
                 </Button>
-              </Right>
-            </ListItem>
-          ))}
-        </List>
+            
+              </ListItem>
+            ))}
+          </List>
+        ) : (
+          <Card>
+            <CardItem header>
+              <Text>Sorry, No members Found</Text>
+            </CardItem>
+            <CardItem>
+              <Body>
+                <Text>Tap on the Add Member Button to add new members</Text>
+              </Body>
+            </CardItem>
+       
+          </Card>
+        )}
       </Content>
     </Container>
   );
@@ -163,6 +111,5 @@ const styles = StyleSheet.create({
   },
   active: { color: 'green', fontFamily: 'space-mono', fontSize: 14 }
 });
-
 
 export default Project;

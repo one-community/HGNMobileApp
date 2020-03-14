@@ -14,4 +14,5 @@ export const ENDPOINTS = {
   UPDATE_PASSWORD: userId => `${APIEndpoint}/userprofile/${userId}/updatePassword`,
   FORCE_PASSWORD: `${APIEndpoint}/forcepassword`,
   LEADER_BOARD: userId => `${APIEndpoint}/dashboard/leaderboard/${userId}`,
+  ALL_USER_PROFILES:`${APIEndpoint}/userprofile`,
 };

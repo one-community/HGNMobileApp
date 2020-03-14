@@ -57,14 +57,25 @@ const MyProfileScreen = ({ currentUserProfile,navigation ,logoutUser}) => {
 
   return (
     <Container>
-      <Content>
+    <Content padder contentContainerStyle={styles.content}>
         <Card transparent>
           <CardItem>
-            <Image
-              source={{ uri: 'https://avatars2.githubusercontent.com/u/46716162?s=460&v=4' }}
+    
+
+            {profilePic ? (
+              <Image
+                source={{ uri: profilePic }}
+                style={styles.profilePic}
+                resizeMode="contain"
+              />
+            ) : (
+              <Image
+              source={require('../../../assets/images/profilePicTempate.png')}
               style={styles.profilePic}
               resizeMode="contain"
-            />
+               
+              />
+            )}
           </CardItem>
           <CardItem>
             <Body>
@@ -78,7 +89,7 @@ const MyProfileScreen = ({ currentUserProfile,navigation ,logoutUser}) => {
 
         <List>
           <ListItem itemDivider>
-           <MaterialIcons size={32} name='email' color='green'/>
+           <MaterialIcons size={32} name='email' color={COLOR.HGN_LIGHT_GREEN}/>
           </ListItem>
           <ListItem>
             <Left>
@@ -89,11 +100,11 @@ const MyProfileScreen = ({ currentUserProfile,navigation ,logoutUser}) => {
             <Right>
               <Text style={styles.publiclyAccessible}>Publicly Accessible?</Text>
             </Right>
-            <CheckBox checked={true} />
+            <CheckBox checked={true} color={COLOR.HGN_LIGHT_GREEN} />
           </ListItem>
 
           <ListItem itemDivider>
-          <MaterialIcons size={32} name='phone' color='green'/>
+          <MaterialIcons size={32} name='phone'color={COLOR.HGN_LIGHT_GREEN}/>
           </ListItem>
           <ListItem>
             <Left>
@@ -102,7 +113,7 @@ const MyProfileScreen = ({ currentUserProfile,navigation ,logoutUser}) => {
             <Right>
               <Text style={styles.publiclyAccessible}>Publicly Accessible?</Text>
             </Right>
-            <CheckBox checked={true} />
+            <CheckBox checked={true} color={COLOR.HGN_LIGHT_GREEN} />
           </ListItem>
           <ListItem itemDivider>
             <Text>Job Title:</Text>
@@ -169,11 +180,14 @@ const MyProfileScreen = ({ currentUserProfile,navigation ,logoutUser}) => {
 };
 
 const styles = StyleSheet.create({
+  content: {
+   /*  backgroundColor: COLOR.SMOKE */
+  },
   publiclyAccessible: { fontSize: 12 },
   text: {
-    color: '#9D69A3',
+    color: COLOR.MEDIUM_BLUE,
     fontWeight: '600',
-    fontFamily: 'space-mono',
+ 
     fontSize: 16
   },
   name: {

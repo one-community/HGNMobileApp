@@ -17,20 +17,27 @@ import {
   Input,
   Icon
 } from 'native-base';
-import { StyleSheet,TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import { COLOR } from '../../utils/colors';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 
-import ModalScreen from '../ModalScreen'
+import ModalScreen from '../ModalScreen';
 
 import _ from 'lodash';
 
-const ProjectsScreen = ({ fetchAllProjects, allProjects, postNewProject,deleteProject ,navigation,logoutUser}) => {
+const ProjectsScreen = ({
+  fetchAllProjects,
+  allProjects,
+  postNewProject,
+  deleteProject,
+  navigation,
+  logoutUser
+}) => {
   const [filteredProjects, setFilteredProjects] = useState(allProjects);
   const [newProjectName, setNewProjectName] = useState('');
 
-  const [modalVisible,setModalVisible]=useState(false)
+  const [modalVisible, setModalVisible] = useState(false);
 
   const [searchText, setSearchText] = useState('');
   useEffect(() => {
@@ -52,17 +59,21 @@ const ProjectsScreen = ({ fetchAllProjects, allProjects, postNewProject,deletePr
 
   navigation.setOptions({
     headerRight: () => (
-      <TouchableOpacity onPress={() => logoutUser()} style={{marginRight:10}}>
-      <AntDesign name="logout" size={32} color="red"  />
-    </TouchableOpacity>
-    ),
+      <TouchableOpacity onPress={() => logoutUser()} style={{ marginRight: 10 }}>
+        <AntDesign name="logout" size={32} color="red" />
+      </TouchableOpacity>
+    )
   });
-
 
   return (
     <Container>
-  {modalVisible&& <ModalScreen text='Are you sure you want to delete the project?' buttonHandlerCancel={setModalVisible} />} 
-      <Content padder>
+      {modalVisible && (
+        <ModalScreen
+          text="Are you sure you want to delete the project?"
+          buttonHandlerCancel={setModalVisible}
+        />
+      )}
+      <Content padder contentContainerStyle={styles.content}>
         <SearchBar
           round
           clearIcon
@@ -77,15 +88,19 @@ const ProjectsScreen = ({ fetchAllProjects, allProjects, postNewProject,deletePr
 
         <Card>
           <CardItem bordered>
-            <Input placeholder="Add a new Project"  onChangeText={(value)=>setNewProjectName(value)}/>
+            <Input
+              placeholder="Add a new Project"
+              onChangeText={value => setNewProjectName(value)}
+            />
             <Right>
-            <TouchableOpacity onPress={()=>postNewProject(newProjectName,true)} disabled={newProjectName.length<=0}>
-            <AntDesign name="pluscircleo" size={32} color="#377fff" />
-            </TouchableOpacity>
-            
+              <TouchableOpacity
+                onPress={() => postNewProject(newProjectName, true)}
+                disabled={newProjectName.length <= 0}
+              >
+                <AntDesign name="pluscircleo" size={32} color="#377fff" />
+              </TouchableOpacity>
             </Right>
           </CardItem>
-      
         </Card>
 
         <List>
@@ -102,19 +117,27 @@ const ProjectsScreen = ({ fetchAllProjects, allProjects, postNewProject,deletePr
                   <Text style={styles.inActive}>Inactive</Text>
                 )}
               </Body>
-             
 
-              <Button bordered success onPress={()=>navigation.navigate('Project', {
-                projectId: project._id,
-                
-              })} >
-              <Text>View</Text>
-            </Button>
+              <Button
+                bordered
+                success
+                onPress={() =>
+                  navigation.navigate('Project', {
+                    projectId: project._id
+                  })
+                }
+              >
+                <Text>View</Text>
+              </Button>
 
-                <Button style={{marginLeft:5}} bordered danger onPress={()=>setModalVisible(true)}>
-                  <Text>Delete</Text>
-                </Button>
-          
+              <Button
+                style={{ marginLeft: 5 }}
+                bordered
+                danger
+                onPress={() => setModalVisible(true)}
+              >
+                <Text>Delete</Text>
+              </Button>
             </ListItem>
           ))}
         </List>
@@ -124,6 +147,7 @@ const ProjectsScreen = ({ fetchAllProjects, allProjects, postNewProject,deletePr
 };
 
 const styles = StyleSheet.create({
+  content:{backgroundColor:COLOR.HGN_LIGHT_BLUE},
   projectText: { color: 'black', fontWeight: '500' },
   inActive: {
     color: 'green',
@@ -136,16 +160,5 @@ const styles = StyleSheet.create({
   active: { color: 'green', fontFamily: 'space-mono', fontSize: 14 }
 });
 
-ProjectsScreen.navigationOptions = ({ navigation }) => ({
-  title: 'My Projects',
 
-  headerStyle: {
-    backgroundColor: COLOR.header
-  },
-
-  headerTintColor: COLOR.white,
-  headerTitleStyle: {
-    fontWeight: 'bold'
-  }
-});
 export default ProjectsScreen;
