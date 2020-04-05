@@ -29,18 +29,18 @@ const AppNavigator = ({auth}) => {
   React.useEffect(() => {
     // Fetch the token from storage then navigate to our appropriate place
 
-    console.log('Inside',auth.isAuthenticated);
+
     const bootstrapAsync = async () => {
       let userToken;
 
       try {
         userToken = await AsyncStorage.getItem(tokenKey);
-        console.log('userToken', userToken);
+       // console.log('userToken', userToken);
 
         if (userToken) {
           httpService.setjwt(userToken);
           const decoded = jwtDecode(userToken);
-          console.log('decoded', decoded);
+          
 
           // Check for expired token
           const currentTime = Date.now() / 1000;
@@ -53,7 +53,7 @@ const AppNavigator = ({auth}) => {
           }
 
           const userProfileURL = ENDPOINTS.USER_PROFILE(decoded.userid);
-           console.log('url', userProfileURL);
+          // console.log('url', userProfileURL);
           let currentUserProfile = await httpService.get(userProfileURL);
           currentUserProfile = { ...currentUserProfile.data, ...decoded };
           // console.log('currentUserProfile', currentUserProfile);

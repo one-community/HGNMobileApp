@@ -4,12 +4,12 @@ import _ from 'lodash';
 import { deleteProject } from '../../actions/projects';
 import { fetchAllMembers, removeProjectMember } from '../../actions/projectMembers';
 import { loginUser, logoutUser } from '../../actions/authActions';
-import { openModal } from '../../actions/modalActions';
-import Project from './Project';
+import { closeModal } from '../../actions/modalActions';
+import ModalScreen from './ModalScreen';
 
 const mapStateToProps = state => {
   return {
-    projectMembers: _.get(state, 'projectMembers.members', [])
+    modal: _.get(state, 'modal', [])
   };
 };
 
@@ -18,5 +18,5 @@ export default connect(mapStateToProps, {
   deleteProject,
   logoutUser,
   removeProjectMember,
-  openModal
-})(Project);
+  closeModal
+})(ModalScreen);

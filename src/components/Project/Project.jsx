@@ -24,7 +24,15 @@ import { Ionicons, AntDesign } from '@expo/vector-icons';
 
 import _ from 'lodash';
 
-const Project = ({ route, fetchAllMembers, projectMembers, navigation }) => {
+const Project = ({
+  route,
+  fetchAllMembers,
+  projectMembers,
+  navigation,
+  addProjectMember,
+  removeProjectMember,
+  openModal
+}) => {
   const projectId = route.params.projectId;
 
   useEffect(() => {
@@ -33,12 +41,36 @@ const Project = ({ route, fetchAllMembers, projectMembers, navigation }) => {
 
   navigation.setOptions({
     headerRight: () => (
-      <Button iconLeft light transparent onPress={() => navigation.navigate('UsersList')}>
+      <Button
+        iconLeft
+        light
+        transparent
+        onPress={() =>
+          navigation.navigate('UsersList', {
+            projectId: projectId
+          })
+        }
+      >
         <Icon name="add" />
         <Text>Add Member</Text>
       </Button>
     )
   });
+
+  const handleRemoveMember = async user => {
+    const payload = {
+      open: true,
+      message: 'Are you sure you want to remove this member?',
+      confirmButtonText: '',
+      cancelButtonText: '',
+      confirmFunction: () => {
+        removeProjectMember(projectId, user);
+        navigation.navigate('Projects');
+      }
+    };
+    await openModal(payload);
+  
+  };
 
   //fetchAllMembers
 
@@ -47,9 +79,9 @@ const Project = ({ route, fetchAllMembers, projectMembers, navigation }) => {
       <Content padder>
         {projectMembers.length ? (
           <List>
-          <ListItem itemDivider>
-          <Text>Project Members</Text>
-        </ListItem> 
+            <ListItem itemDivider>
+              <Text>Project Members</Text>
+            </ListItem>
             {projectMembers.map((member, key) => (
               <ListItem key={key}>
                 <Body>
@@ -57,27 +89,26 @@ const Project = ({ route, fetchAllMembers, projectMembers, navigation }) => {
                     {member.firstName} {member.lastName}
                   </Text>
                 </Body>
-              
-                  <Button
-                    bordered
-                    primary
-                    onPress={() =>
-                      navigation.navigate('UserProfile', {
-                        userId: member._id
-                      })
-                    }
-                  >
-                    <Text>View</Text>
-                  </Button>
-                  <Button
-                  style={{marginLeft:10}}
+
+                <Button
+                  bordered
+                  primary
+                  onPress={() =>
+                    navigation.navigate('UserProfile', {
+                      userId: member._id
+                    })
+                  }
+                >
+                  <Text>View</Text>
+                </Button>
+                <Button
+                  style={{ marginLeft: 10 }}
                   bordered
                   danger
-           
+                  onPress={() => handleRemoveMember(member)}
                 >
                   <Text>Remove</Text>
                 </Button>
-            
               </ListItem>
             ))}
           </List>
@@ -91,7 +122,6 @@ const Project = ({ route, fetchAllMembers, projectMembers, navigation }) => {
                 <Text>Tap on the Add Member Button to add new members</Text>
               </Body>
             </CardItem>
-       
           </Card>
         )}
       </Content>

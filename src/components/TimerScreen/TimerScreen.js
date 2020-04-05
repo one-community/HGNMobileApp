@@ -78,10 +78,10 @@ const TimerScreen = () => {
     totalSeconds.toString().length === 1 ? `0${totalSeconds.toString()}` : totalSeconds;
   // console.log('timerOn',timerOn)
   return (
-    <Container style={{ backgroundColor: COLOR.header }}>
+    <Container style={{ backgroundColor: COLOR.SMOKE }}>
       <Content padder>
         <Card>
-          <CardItem style={{ backgroundColor: COLOR.header }}>
+          <CardItem style={{ backgroundColor: COLOR.MEDIUM_BLUE }}>
             <Body style={styles.timeContainer}>
               <Text style={styles.hours}>{hours}</Text>
               <Text style={styles.timeSeperator}>:</Text>
@@ -114,7 +114,7 @@ const TimerScreen = () => {
       <Footer>
         <FooterTab>
           <Button full>
-            <Text style={{ color: 'red', fontFamily: 'Roboto', fontSize: 17 }}>
+            <Text style={{ color:  COLOR.RED, fontFamily: 'Roboto', fontSize: 17 }}>
             {isActive?'Tap on Stop Button to save your time':'Tap on Start Button to start logging your time'}
             </Text>
           </Button>
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
   labelContainer: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   buttonStart: {
     borderWidth: 10,
-    borderColor: 'green',
+    borderColor: COLOR.HGN_LIGHT_GREEN,
     width: 150,
     height: 150,
     borderRadius: 75,
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
   },
   buttonStop: {
     borderWidth: 10,
-    borderColor: 'red',
+    borderColor: COLOR.RED,
     width: 150,
     height: 150,
     borderRadius: 75,
@@ -180,12 +180,12 @@ const styles = StyleSheet.create({
   },
   buttonTextStart: {
     fontSize: 40,
-    color: 'green',
+    color: COLOR.HGN_LIGHT_GREEN,
     fontWeight: 'bold'
   },
   buttonTextStop: {
     fontSize: 45,
-    color: 'red',
+    color:  COLOR.RED,
     fontWeight: 'bold'
   }
 });

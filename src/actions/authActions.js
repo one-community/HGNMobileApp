@@ -17,9 +17,9 @@ export const loginUser = (credentials, navigation) => async dispatch => {
 
       httpService.setjwt(result.data.token);
       const decoded = jwtDecode(result.data.token);
-      console.log('userid',decoded.userid)
+
       const userProfileURL = ENDPOINTS.USER_PROFILE(decoded.userid)
-      console.log('url',userProfileURL)
+   
      // let currentUserProfile=await httpService.get(userProfileURL)
       //currentUserProfile={...currentUserProfile.data,...decoded}
      // console.log('currentUserProfile', currentUserProfile);

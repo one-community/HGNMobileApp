@@ -1,3 +1,3 @@
-import ModalScreen from './ModalScreen';
+import ModalScreen from './ModalScreen.container';
 
 export default ModalScreen;

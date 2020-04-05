@@ -32,21 +32,17 @@ const ProjectsScreen = ({
   postNewProject,
   deleteProject,
   navigation,
-  logoutUser
+  logoutUser,
+  openModal
 }) => {
   const [filteredProjects, setFilteredProjects] = useState(allProjects);
   const [newProjectName, setNewProjectName] = useState('');
-
-  const [modalVisible, setModalVisible] = useState(false);
 
   const [searchText, setSearchText] = useState('');
   useEffect(() => {
     fetchAllProjects();
     setFilteredProjects(allProjects);
   }, [allProjects.length]);
-
-  //const inActiveProjects = allProjects.filter(project => project.isActive === true).length;
-  //const activeProjects = allProjects.length - inActiveProjects;
 
   const handleSearch = searchText => {
     setSearchText(searchText);
@@ -55,6 +51,19 @@ const ProjectsScreen = ({
     );
 
     setFilteredProjects(filtered);
+  };
+
+  const handleDelete = projectId => {
+    console.log('handleDelete', projectId);
+
+    const payload = {
+      open: true,
+      message: 'Are you sure you want to delete this project?',
+      confirmButtonText: '',
+      cancelButtonText: '',
+      confirmFunction: () => deleteProject(projectId)
+    };
+    openModal(payload);
   };
 
   navigation.setOptions({
@@ -67,12 +76,6 @@ const ProjectsScreen = ({
 
   return (
     <Container>
-      {modalVisible && (
-        <ModalScreen
-          text="Are you sure you want to delete the project?"
-          buttonHandlerCancel={setModalVisible}
-        />
-      )}
       <Content padder contentContainerStyle={styles.content}>
         <SearchBar
           round
@@ -117,26 +120,23 @@ const ProjectsScreen = ({
                   <Text style={styles.inActive}>Inactive</Text>
                 )}
               </Body>
-
               <Button
-                bordered
-                success
+                transparent
                 onPress={() =>
                   navigation.navigate('Project', {
                     projectId: project._id
                   })
                 }
               >
-                <Text>View</Text>
+                <Text style={{ color: COLOR.HGN_LIGHT_GREEN, fontWeight: 'bold' }}>View</Text>
               </Button>
 
               <Button
                 style={{ marginLeft: 5 }}
-                bordered
-                danger
-                onPress={() => setModalVisible(true)}
+                transparent
+                onPress={() => handleDelete(project._id)}
               >
-                <Text>Delete</Text>
+                <Text style={{ color: COLOR.RED, fontWeight: 'bold' }}>Delete</Text>
               </Button>
             </ListItem>
           ))}
@@ -147,18 +147,16 @@ const ProjectsScreen = ({
 };
 
 const styles = StyleSheet.create({
-  content:{backgroundColor:COLOR.HGN_LIGHT_BLUE},
-  projectText: { color: 'black', fontWeight: '500' },
+  content: { backgroundColor: COLOR.SMOKE },
+  projectText: { fontWeight: 'bold', fontSize: 18, color: COLOR.HGN_DARK_BLUE },
   inActive: {
-    color: 'green',
     fontFamily: 'space-mono',
     fontSize: 14,
     fontFamily: 'space-mono',
 
-    color: 'tomato'
+    color: COLOR.RED
   },
-  active: { color: 'green', fontFamily: 'space-mono', fontSize: 14 }
+  active: { color: COLOR.HGN_LIGHT_GREEN, fontFamily: 'space-mono', fontSize: 14 }
 });
-
 
 export default ProjectsScreen;

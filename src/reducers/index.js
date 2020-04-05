@@ -22,11 +22,13 @@ import { timeEntriesForSpecifiedProjectReducer } from './timeEntriesForSpecified
 import { allTimeEntriesReducer } from './allTimeEntriesReducer';
 import { timeEntriesForSpecifiedPeriodReducer } from './timeEntriesForSpecifiedPeriodReducer';
 import { errorsReducer } from './errorsReducer';
+import { modalReducer } from './modalReducer';
 
 export default combineReducers({
   auth: authReducer,
   userProfile: userProfileByIdReducer,
    allUserProfiles: allUserProfilesReducer,
+   modal:modalReducer,
   // userTeamMembers: userTeamMembersReducer,
   // userProjectMembers: userProjectMembersReducer,
   // dashboardData: dashboardDataReducer,

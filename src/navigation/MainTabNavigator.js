@@ -12,9 +12,10 @@ import UserProfileScreen from '../components/UserProfileScreen';
 import TimerScreen from '../components/TimerScreen';
 import Project from '../components/Project';
 import UsersList from '../components/UsersList'
-
+import ModalScreen from '../components/ModalScreen';
 import { tokenKey } from '../../config';
 import { setCurrentUser, logoutUser } from '../actions/authActions';
+import EditProfile from '../components/EditProfile';
 
 const MyProfileStack = createStackNavigator();
 const ProjectsStack = createStackNavigator();
@@ -60,6 +61,7 @@ const MyProfile = () => {
         component={MyProfileScreen}
         options={{ title: 'My Profile' }}
       />
+      <MyProfileStack.Screen name="EditProfile" component={EditProfile} />
     </MyProfileStack.Navigator>
   );
 };
@@ -69,7 +71,7 @@ const Projects = () => {
     <ProjectsStack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: COLOR.HGN_SILVER
+          backgroundColor: COLOR.HGN_DARK_BLUE
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
@@ -106,6 +108,9 @@ const LeaderBoard = () => {
 
 const MainTabNavigator = () => {
   return (
+    <>
+
+
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
@@ -137,54 +142,8 @@ const MainTabNavigator = () => {
       <Tab.Screen name="MyProfile" component={MyProfile} />
       <Tab.Screen name="TimeEntry" component={TimeEntry} />
     </Tab.Navigator>
+    <ModalScreen/>
+    </>
   );
 };
 export default MainTabNavigator;
-//const MyProfileStack = createStackNavigator({ MyProfile: MyProfileScreen });
-
-//const ProjectsStack = createStackNavigator({ Projects: ProjectsScreen });
-
-// const LeaderBoardStack = createStackNavigator({
-//   LeaderBoard: LeaderBoardScreen,
-//   UserProfile: UserProfileScreen
-// });
-
-// const tabNavigator = createBottomTabNavigator(
-//   {
-//     LeaderBoard: LeaderBoardStack,
-//     Projects: ProjectsStack,
-//     MyProfile: MyProfileStack
-//   },
-
-//   {
-//     initialRouteName: 'LeaderBoard',
-//     defaultNavigationOptions: ({ navigation }) => ({
-//       tabBarIcon: ({ focused, horizontal, tintColor }) => {
-//         const { routeName } = navigation.state;
-
-//         let iconName;
-//         if (routeName === 'Projects') {
-//           iconName = focused ? 'ios-information-circle' : 'ios-information-circle-outline';
-//         } else if (routeName === 'LeaderBoard') {
-//           iconName = focused ? 'ios-list-box' : 'ios-list';
-//         } else if (routeName === 'MyProfile') {
-//           iconName = focused ? 'ios-information-circle' : 'ios-information-circle-outline';
-//         }
-
-//         return <TabBarIcon name={iconName} size={25} color={tintColor} />;
-//       }
-//     }),
-//     tabBarOptions: {
-//       activeTintColor: '#e91e63',
-//       labelStyle: {
-//         fontSize: 14,
-//         fontWeight: '600'
-//       },
-//       style: {
-//         backgroundColor: COLOR.header
-//       }
-//     }
-//   }
-// );
-
-// export default tabNavigator;

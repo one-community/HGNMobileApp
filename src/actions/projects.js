@@ -42,6 +42,7 @@ export const postNewProject = (projectName, isActive) => {
 };
 
 export const deleteProject = projectId => {
+  console.log('deleteProject')
   const url = ENDPOINTS.PROJECT + projectId;
 
   return async dispatch => {

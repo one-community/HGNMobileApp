@@ -6,7 +6,7 @@ export const allProjectsReducer = (allProjects = [], action) => {
   else if(action.type===types.ADD_NEW_PROJECT)
   {
 
-    console.log("PAYLOAD ADD", action.payload)
+
 
     return allProjects.concat(action.payload)
 
@@ -15,16 +15,16 @@ export const allProjectsReducer = (allProjects = [], action) => {
   else if(action.type===types.DELETE_PROJECT)
   {
 
-    console.log( allProjects.length)
+
     const updated=allProjects.filter(item => {
 
     
 
-      console.log(typeof item._id,  action.payload)
+
 
     return item._id!==  action.payload 
     });
-    console.log(updated.length,allProjects.length)
+ 
 
   return updated
     

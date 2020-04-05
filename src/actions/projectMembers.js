@@ -18,6 +18,72 @@ export const fetchAllMembers = projectId => {
   };
 };
 
+export const addProjectMember=(projectId,user)=>{
+
+
+
+
+  const request = httpService.post(ENDPOINTS.PROJECT_MEMBERS(projectId), {
+    projectId,
+    users: [{
+      userId:user._id,
+      operation:'Assign'
+    }]
+  });
+
+
+  return async dispatch => {
+    request.then(res => {
+
+
+        dispatch(assignNewMember({
+          _id: user._id,
+          firstName:user.firstName,
+          lastName:user.firstName
+        }));
+       // dispatch(removeFoundUser(userId))
+   
+    }).catch((err) => {
+      console.log("Error", err);
+      //dispatch(addNewMemberError(err));
+    })
+  }
+
+  
+
+}
+
+
+export const removeProjectMember=(projectId,user)=>{
+
+
+
+
+  const request = httpService.post(ENDPOINTS.PROJECT_MEMBERS(projectId), {
+    projectId,
+    users: [{
+      userId:user._id,
+      operation:'unAssign'
+    }]
+  });
+
+
+  return async dispatch => {
+    request.then(res => {
+      console.log("RES", res);
+      dispatch(deleteMember(user._id));
+
+   
+    }).catch((err) => {
+      console.log("Error", err);
+      //dispatch(addNewMemberError(err));
+    })
+  }
+
+  
+
+}
+
 export const setMemberStart = () => {
   return {
     type: types.FETCH_MEMBERS_START
@@ -45,3 +111,27 @@ export const setMembersError = err => {
     err
   };
 };
+
+/**
+ * add new member to project
+ * @param member : {}
+ */
+export const assignNewMember = (member) => {
+
+  return {
+    type: types.ADD_NEW_MEMBER,
+    member
+  }
+}
+
+
+/**
+ * remove a member from project
+ * @param userId : _id 
+ */
+export const deleteMember = (userId) => {
+  return {
+    type: types.DELETE_MEMBER,
+    userId
+  }
+}
