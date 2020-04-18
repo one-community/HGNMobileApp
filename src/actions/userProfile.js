@@ -5,6 +5,8 @@ import {
 	editUserProfile as editUserProfileActionCreator,
 	CLEAR_USER_PROFILE
 } from '../constants/userProfile'
+
+import {setCurrentUser } from '../constants/auth'
 import { ENDPOINTS } from '../utils/URL'
 
 export const getUserProfile = userId => {
@@ -42,7 +44,7 @@ export const updateUserProfile = (userId, userProfile) => {
 		//console.log('Result is ', res, userProfile)
 
 		if (res.status === 200) {
-			await dispatch(getUserProfileActionCreator(userProfile))
+			//await dispatch(setCurrentUser(userProfile))
 		}
 		return res.status
 	}

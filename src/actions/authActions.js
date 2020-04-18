@@ -2,7 +2,7 @@ import jwtDecode from 'jwt-decode';
 import httpService from '../services/httpService';
 import { tokenKey } from '../../config';
 import { ENDPOINTS } from '../utils/URL';
-import { GET_ERRORS } from '../constants/errors';
+
 import { SET_CURRENT_USER } from '../constants/auth';
 import { AsyncStorage } from 'react-native';
 
@@ -13,26 +13,18 @@ export const loginUser = (credentials, navigation) => async dispatch => {
       dispatch(setCurrentUser({ new: true, userId: res.data.userId }));
     } else {
       await AsyncStorage.setItem(tokenKey, result.data.token);
-      //navigation.push('Main');
 
       httpService.setjwt(result.data.token);
       const decoded = jwtDecode(result.data.token);
 
-      const userProfileURL = ENDPOINTS.USER_PROFILE(decoded.userid)
-   
-     // let currentUserProfile=await httpService.get(userProfileURL)
-      //currentUserProfile={...currentUserProfile.data,...decoded}
-     // console.log('currentUserProfile', currentUserProfile);
+      const userProfileURL = ENDPOINTS.USER_PROFILE(decoded.userid);
+
       dispatch(setCurrentUser(decoded));
     }
   } catch (err) {
     console.log('Error', err);
     if (err.response && err.response.status === 403) {
       const errors = { email: err.response.data.message };
-      // dispatch({
-      //   type: GET_ERRORS,
-      //   payload: errors
-      // })
     }
   }
 };

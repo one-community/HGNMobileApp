@@ -12,7 +12,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 //const { persistor, store } = configureStore();
 
 import AppNavigator from './src/navigation/AppNavigator';
-
+import { Root } from "native-base";
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
 
@@ -26,19 +26,23 @@ export default function App(props) {
     );
   } else {
     return (
+      <Root>
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle='light-content' />}
 
         <Provider store={store}>
         <PersistGate  persistor={persistor}>
         
+      
         <AppNavigator />
+       
         </PersistGate>
      
         
         </Provider>
      
       </View>
+      </Root>
     );
   }
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Image, TouchableOpacity,View } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { COLOR } from '../../utils/colors';
 import {
@@ -25,12 +25,13 @@ import {
   List,
   ListItem,
   Separator,
-  CheckBox
+  CheckBox,
 } from 'native-base';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import _ from 'lodash'
 
 const MyProfileScreen = ({ currentUserProfile, navigation, logoutUser }) => {
-  // console.log('currentUserProfile', currentUserProfile);
+  console.log('currentUserProfile', currentUserProfile);
 
   let {
     profilePic,
@@ -41,14 +42,15 @@ const MyProfileScreen = ({ currentUserProfile, navigation, logoutUser }) => {
     jobTitle,
     role,
     personalLinks = [],
-    adminLinks = []
+    adminLinks = [],
+    infringments
   } = currentUserProfile;
   navigation.setOptions({
     headerRight: () => (
       <TouchableOpacity onPress={() => logoutUser()} style={{ marginRight: 10 }}>
         <AntDesign name="logout" size={32} color="red" />
       </TouchableOpacity>
-    )
+    ),
   });
 
   return (
@@ -72,20 +74,40 @@ const MyProfileScreen = ({ currentUserProfile, navigation, logoutUser }) => {
                 {lastName}, {firstName}
               </Text>
 
-              <Button
-          
-              onPress={() =>
-                navigation.navigate('EditProfile')
-              }
-            >
-              <Icon name="add" />
-              <Text>Edit Profile</Text>
-            </Button>
-           
               <Text style={styles.role}>{role}</Text>
             </Body>
           </CardItem>
+
+    
+
+          <View style={styles.editButtonContainer}>
+          <Button block onPress={() => navigation.navigate('EditProfile')}>
+
+          <Text>Edit Profile</Text>
+        </Button>
+          
+          </View>
+        </Card>
+
+
+        <Card>
+        <CardItem>
+        <Left>
+        <Text>Blue Stars:</Text>
+        </Left>
+     
+        <Body style={{flexDirection:'row',justifyContent:'space-between'}}>
+
        
+        { _.times(infringments.length>5?5:infringments.length, ()=> (<Icon name='star'  style={{fontSize: 20, color: COLOR.HGN_LIGHT_BLUE}}/>)) }
+
+      
+       
+
+       
+        </Body>
+     
+        </CardItem>
         </Card>
 
         <List>
@@ -188,21 +210,25 @@ const styles = StyleSheet.create({
     color: COLOR.MEDIUM_BLUE,
     fontWeight: '600',
 
-    fontSize: 16
+    fontSize: 16,
   },
   name: {
     fontSize: 20,
     fontWeight: 'bold',
     alignSelf: 'center',
-    margin: 5
+    margin: 5,
   },
   role: {
     fontSize: 18,
     fontWeight: '400',
     alignSelf: 'center',
-    margin: 5
+    margin: 5,
   },
-  profilePic: { height: 200, width: 100, flex: 1 }
+  profilePic: { height: 200, width: 100, flex: 1 },
+  editButtonContainer:{
+    paddingLeft:100,
+    paddingRight:100
+  }
 });
 
 export default MyProfileScreen;
